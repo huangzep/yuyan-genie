@@ -1,0 +1,17 @@
+.DS_Store
+node_modules/
+/dist/
+/config/_config.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/src/cubetv/pc/views/index
+/src/cubetv/pc/components/index
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

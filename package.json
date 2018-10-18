@@ -1,0 +1,29 @@
+{
+  "name": "genie",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "excel": "node entry/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huangzep/yuyan-genie.git"
+  },
+  "keywords": [
+    "yuyan"
+  ],
+  "author": "huangzep",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huangzep/yuyan-genie/issues"
+  },
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "excel-tobe-json": "^1.5.0",
+    "google-excel": "^1.2.0",
+    "minimist": "^1.2.0",
+    "qq-excel": "^1.1.0"
+  },
+  "homepage": "https://github.com/huangzep/yuyan-genie#readme"
+}
