@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "excel": "node entry/index.js"
+    "excel": "node entry/excel.js",
+    "start": "node entry/index.js"
   },
   "repository": {
     "type": "git",
