@@ -50,6 +50,6 @@ excelToJson(excelPathName, { isColOriented: false, sheet: 1 }, function(
         }
       }
     })
-    fs.writeFileSync(outputLangPath + '/' + '55.json', JSON.stringify(yyJson))
+    fs.writeFileSync(outputLangPath + '/' + '525.json', JSON.stringify(yyJson))
   }
 })
