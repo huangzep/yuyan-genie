@@ -128,7 +128,7 @@ class wechatCallbackapiTest{
                 echo $resultStr;
               } 
               if ($keyword) {
-                $contentStr = '主人，我在等待您的降临！'."\n".'<a href="https://www.wenjuan.com/s/jQ3i22/">回复1或者许愿，就可以进入灯灯的许愿通道</a>'."\n".'<a href="https://www.wenjuan.com/s/AZfUFfG/">回复2或者悄悄话，让灯灯来倾听你的故事吧~~</a>';
+                $contentStr = '主人，我在等待您的降临！'."\n".'<a href="https://www.wenjuan.com/s/jQ3i22/">回复1或者许愿，就可以进入灯灯的许愿通道</a>'."\n".'<a href="https://www.wenjuan.com/s/AZfUFfG/">回复2或者悄悄话，让灯灯来倾听你的故事吧~~</a>'."\n".'通过审核的心愿将在每晚8点时分推送给各位小主人们(*^▽^*)';
                 $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $contentStr);
                 echo $resultStr;
             }
@@ -158,7 +158,7 @@ function responseMsg() {
             $fromUser = $postObj->ToUserName;
             $time = time();
             $msgType = 'text';
-            $content = '主人，我在等待您的降临！'."\n".'<a href="https://www.wenjuan.com/s/jQ3i22/">回复1或者许愿，就可以进入灯灯的许愿通道</a>'."\n".'<a href="https://www.wenjuan.com/s/AZfUFfG/">回复2或者悄悄话，让灯灯来倾听你的故事吧~~</a>';
+            $content = '主人，我在等待您的降临！'."\n".'<a href="https://www.wenjuan.com/s/jQ3i22/">回复1或者许愿，就可以进入灯灯的许愿通道</a>'."\n".'<a href="https://www.wenjuan.com/s/AZfUFfG/">回复2或者悄悄话，让灯灯来倾听你的故事吧~~</a>'."\n".'通过审核的心愿将在每晚8点时分推送给各位小主人们(*^▽^*)';
             $template = "<xml>
                             <ToUserName><![CDATA[%s]]></ToUserName>
                             <FromUserName><![CDATA[%s]]></FromUserName>

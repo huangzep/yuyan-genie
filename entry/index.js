@@ -1,6 +1,7 @@
 let fs = require('fs')
 let path = require('path')
 let ejs = require('ejs')
+let utils = require('./utils')
 let excelTobeJson = require('excel-tobe-json')
 let excelToJson = excelTobeJson.excelToJson
 excelTobeJson.extendOnlineExcel(require('google-excel'))
@@ -22,11 +23,16 @@ excelToJson(excelPathName1, { isColOriented: false, sheet: 1 }, function(
   err,
   excelDatas
 ) {
+  let seq = 0
   let yyJson = {
     lovers: [],
     lookers: [],
     teamers: [],
     thingers: [],
+    todaylovers: [],
+    todaylookers: [],
+    todayteamers: [],
+    todaythingers: [],
     date: ('0' + new Date().getDate()).slice(-2),
     title: '',
     imgUrl: '',
@@ -43,7 +49,7 @@ excelToJson(excelPathName1, { isColOriented: false, sheet: 1 }, function(
     )
     let smallHmtl = currentHtml.replace(/\s/g, ' ')
     let endIndex = smallHmtl.indexOf('accept_music')
-    let result = smallHmtl.slice(100, Math.min(10000, endIndex + 1000)).match(REG)
+    let result = smallHmtl.slice(100, Math.max(10000, endIndex + 1000)).match(REG)
     yyJson.imgUrl = result[1]
     yyJson.title = result[2]
     yyJson.musicPart = result[3]
@@ -66,6 +72,8 @@ excelToJson(excelPathName1, { isColOriented: false, sheet: 1 }, function(
           obj.reward = value
         } else if (/微信号/.test(key)) {
           obj.weixin = value
+        } else if (/创建时间/.test(key)) {
+          obj.date = utils.excel2Date(value)
         } else if (/心愿类型/.test(key)) {
           if (/脱单/.test(value)) yyJson.lovers.push(obj)
           if (/找Ta/.test(value)) yyJson.lookers.push(obj)
@@ -74,6 +82,25 @@ excelToJson(excelPathName1, { isColOriented: false, sheet: 1 }, function(
         }
       }
     })
+    //添加序号
+    yyJson.lovers.forEach(n => {
+      n.id = seq++
+    })
+    yyJson.lookers.forEach(n => {
+      n.id = seq++
+    })
+    yyJson.teamers.forEach(n => {
+      n.id = seq++
+    })
+    yyJson.thingers.forEach(n => {
+      n.id = seq++
+    })
+    //选出今天
+    yyJson.todaylovers = utils.pickToday(yyJson.lovers, yyJson.date)
+    yyJson.todaylookers = utils.pickToday(yyJson.lookers, yyJson.date)
+    yyJson.todayteamers = utils.pickToday(yyJson.teamers, yyJson.date)
+    yyJson.todaythingers = utils.pickToday(yyJson.thingers, yyJson.date)
+
     fs.writeFileSync(outputLangPath + '/' + '1.json', JSON.stringify(yyJson))
     //模板生成wish.html
     let templateWish = fs.readFileSync(
