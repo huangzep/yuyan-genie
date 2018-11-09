@@ -43,7 +43,7 @@ excelToJson(excelPathName, { isColOriented: false, sheet: 1 }, function(
         } else if (/序号/.test(key)) {
           obj.id = value
         } else if (/心愿类型/.test(key)) {
-          if (/脱单/.test(value)) yyJson.llovers.push(obj)
+          if (/脱单/.test(value)) yyJson.lovers.push(obj)
           if (/找TA/.test(value)) yyJson.lookers.push(obj)
           if (/组队/.test(value)) yyJson.teamers.push(obj)
           if (/闲物/.test(value)) yyJson.thingers.push(obj)
