@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "excel": "node entry/excel.js",
-    "start": "node entry/index.js"
+    "start": "node entry/index.js",
+    "ftp": "node entry/push.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,8 @@
     "excel-tobe-json": "^1.5.0",
     "google-excel": "^1.2.0",
     "minimist": "^1.2.0",
-    "qq-excel": "^1.1.0"
+    "qq-excel": "^1.1.0",
+    "commander": "^2.15.1"
   },
   "homepage": "https://github.com/huangzep/yuyan-genie#readme"
 }

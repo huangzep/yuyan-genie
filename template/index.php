@@ -83,11 +83,6 @@ class wechatCallbackapiTest{
 
             if (!empty( $keyword )) {
               <% lovers.forEach(function(lover){ %>
-                if ($keyword == "<%= date + lover.id + lover.gender %>") {
-                  $mediaId = <%= lover.id %>;
-                  $resultStr = sprintf($imgTpl, $fromUsername, $toUsername, $time, $mediaId);
-                  echo $resultStr;
-                } 
                 if ($keyword == "<%= date + lover.id %>") {
                   $contentStr = "<%= lover.content %>"."\r\n"."微信号"."<%= lover.weixin %>";
                   $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $contentStr);

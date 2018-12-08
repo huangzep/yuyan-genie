@@ -103,12 +103,15 @@
                         <p>
                             <span style="font-size: 14px;"><%= lover.content %><span style="color: #EB6794;">（<%= lover.grade + lover.gender %>）</span></span>
                         </p>
+                        <% if (typeof (lover.image) === 'string') { %>
+                        <p style="text-align: center;">
+                            <img class="" data-copyright="0" ratio="1.7777777777777777" data-s="300,640" src="<%= lover.image %>" data-type="jpeg" width="720" style=""/>
+                        </p>
+                        <% } else { %>
                         <p>
                             <br/>
                         </p>
-                        <p>
-                            <strong><span style="font-size: 14px;">回复【<%= date + lover.id + lover.gender %>】四个字可查看照片哦~</span></strong>
-                        </p>
+                        <% } %>
                     </section>
                 </section>
             </section>
@@ -149,9 +152,15 @@
                       <p>
                           <span style="font-size: 14px;"><%= looker.content %><span style="color: rgb(252, 180, 43);">（<%= looker.grade + looker.gender %>）</span></span>
                       </p>
+                      <% if (typeof (looker.image) === 'string') { %>
+                      <p style="text-align: center;">
+                        <img class="" data-copyright="0" ratio="1.7777777777777777" data-s="300,640" src="<%= looker.image %>" data-type="jpeg" width="720" style=""/>
+                      </p>
+                      <% } else { %>
                       <p>
                           <br/>
                       </p>
+                      <% } %>
                       <p>
                           <strong><span style="font-size: 14px;">报答：<%= looker.reward %></span></strong>
                       </p>
@@ -195,9 +204,15 @@
                       <p style="white-space: normal;">
                           <span style="font-size: 14px;"><%= teamer.content %><span style="color: rgb(128, 177, 53);">(<%= teamer.grade + teamer.gender %>)</span></span>
                       </p>
-                      <p style="white-space: normal;">
+                      <% if (typeof (teamer.image) === 'string') { %>
+                      <p style="text-align: center;">
+                          <img class="" data-copyright="0" ratio="1.7777777777777777" data-s="300,640" src="<%= teamer.image %>" data-type="jpeg" width="720" style=""/>
+                      </p>
+                      <% } else { %>
+                      <p>
                           <br/>
                       </p>
+                      <% } %>
                       <p style="white-space: normal;">
                           <span style="font-size: 14px;color: #80B135;font-size: 14px;color: #0C0C0C;"><strong>报答：<%= teamer.reward %></strong></span>
                       </p>
@@ -241,9 +256,15 @@
                       <p style="white-space: normal;">
                           <span style="font-size: 14px;"><%= thinger.content %><span style="color: #43BBEF;">(<%= thinger.grade + thinger.gender %>)</span></span>
                       </p>
-                      <p style="white-space: normal;">
+                      <% if (typeof (thinger.image) === 'string') { %>
+                      <p style="text-align: center;">
+                        <img class="" data-copyright="0" ratio="1.7777777777777777" data-s="300,640" src="<%= thinger.image %>" data-type="jpeg" width="720" style=""/>
+                      </p>
+                      <% } else { %>
+                      <p>
                           <br/>
                       </p>
+                      <% } %>
                       <p style="white-space: normal;">
                           <strong><span style="font-size: 14px;">报答：<%= thinger.reward %></span></strong>
                       </p>
@@ -255,19 +276,11 @@
       <p style="white-space: normal;">
           <br/>
       </p>
-      <section data-role="paragraph" class="xmyeditor.com" style="border: 0px none;box-sizing: border-box;">
-          <p>
-              <br/>
-          </p>
-      </section>
-      <p style="white-space: normal;">
-          <br/>
-      </p>
-      <p style="white-space: normal;">
-          <br/>
-      </p>
-      <p style="white-space: normal;">
-          <img class="lazy" ratio="1" src="https://mmbiz.qpic.cn/mmbiz_gif/UP5lSOgJhe3SFVy6rBia6ibIibicyQ2e0svMfPEOLm0miaUOF28HguuIqSCpCF1nv2qjM7DIoGkbX7QVnQsS4PHMrVQ/640?wx_fmt=gif" data-type="gif" width="400" style="margin-right: auto;margin-left: auto;width: 30px;display: inline-block;vertical-align: middle;"/><span style="font-size: 14px;">戳原文，进入<strong>【还愿通道】</strong>逛一逛~</span>
-      </p>
+      <p style="text-align:center;margin-right: 8px;margin-left: 8px;max-width: 100%;min-height: 1em;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <span style="max-width: 100%;color: rgb(136, 136, 136);font-size: 12px;box-sizing: border-box !important;word-wrap: break-word !important;"><img class="" ratio="0.040690505548705305" data-type="png" width="200" title="分割线" src="https://mmbiz.qpic.cn/mmbiz_png/JawzsTSIAf62nmjlb04u7oyHOa4T1VXLLFKn6aNevPl2OUK1oiaBhGTpWrj3UyghTuJoJIB5ibbfPMx8Ot6jZ3qg/640?wx_fmt=png" style="max-width: 558px;display: inline;box-sizing: border-box !important;word-wrap: break-word !important;visibility: visible !important;width: 200px !important;"/></span>
+        </p>
+        <p style="text-align:center;margin-right: 32px;margin-left: 32px;min-height: 16px;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(61, 61, 61);font-size: 14px;box-sizing: border-box !important;word-wrap: break-word !important;"><span data-txtlessp="120" data-txtless="spin" style="max-width: 100%;color: rgb(228, 157, 172);box-sizing: border-box !important;word-wrap: break-word !important;">◆ </span> <span style="max-width: 100%;color: rgb(250, 211, 172);box-sizing: border-box !important;word-wrap: break-word !important;">◆ </span> <span data-txtlessp="-120" data-txtless="spin" style="max-width: 100%;color: rgb(255, 233, 234);box-sizing: border-box !important;word-wrap: break-word !important;">◆ &nbsp;<span data-txtlessp="120" data-txtless="spin" style="max-width: 100%;color: rgb(121, 134, 175);box-sizing: border-box !important;word-wrap: break-word !important;">◆ </span> <span style="max-width: 100%;color: rgb(17, 163, 215);box-sizing: border-box !important;word-wrap: break-word !important;">◆</span></span></strong>
+        </p>
   </section>
 </section>

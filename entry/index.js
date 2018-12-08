@@ -1,11 +1,16 @@
 let fs = require('fs')
 let path = require('path')
 let ejs = require('ejs')
+const program = require('commander')
+let ftp = require('./ftp')
 let utils = require('./utils')
 let excelTobeJson = require('excel-tobe-json')
 let excelToJson = excelTobeJson.excelToJson
 excelTobeJson.extendOnlineExcel(require('google-excel'))
 excelTobeJson.extendOnlineExcel(require('qq-excel'))
+
+program.parse(process.argv)
+const { args } = program
 
 let isHttpUrl = function(url) {
   return /^http(s)?:\/\/([\w-_]+\.)*[\w-_]+\.[a-zA-Z]+(:\d+)?/i.test(url)
@@ -42,7 +47,7 @@ excelToJson(excelPathName1, { isColOriented: false, sheet: 1 }, function(
     console.log(err)
   } else {
     //读取新页面
-    const REG = /灯神说.+"(https?.+=jpe?g)"[^\u300a\u300b\u4e00-\u9fa5]+([\u300a\u300b\u4e00-\u9fa5]+).+(<iframe.+div>)/
+    const REG = /灯神说.+"(https?.+=(gif|png|jpe?g))"[^\u300a\u300b\u4e00-\u9fa5]+([\u300a\u300b\u4e00-\u9fa5]+).+(<iframe.+div>)/
     let currentHtml = fs.readFileSync(
       path.join(process.cwd(), '/template/current.html'),
       'utf8'
@@ -51,8 +56,8 @@ excelToJson(excelPathName1, { isColOriented: false, sheet: 1 }, function(
     let endIndex = smallHmtl.indexOf('accept_music')
     let result = smallHmtl.slice(100, Math.max(10000, endIndex + 1000)).match(REG)
     yyJson.imgUrl = result[1]
-    yyJson.title = result[2]
-    yyJson.musicPart = result[3]
+    yyJson.title = result[3]
+    yyJson.musicPart = result[4]
     //读取excel
     excelDatas.forEach((wish, index) => {
       let obj = {}
@@ -63,7 +68,7 @@ excelToJson(excelPathName1, { isColOriented: false, sheet: 1 }, function(
         } else if (/年级/.test(key)) {
           obj.grade = value
         } else if (/图片/.test(key)) {
-          obj.image = value
+          typeof value === 'string' && (obj.image = value.split('?')[0])
         } else if (/心愿描述/.test(key)) {
           obj.content = value
         } else if (/序号/.test(key)) {
@@ -101,7 +106,7 @@ excelToJson(excelPathName1, { isColOriented: false, sheet: 1 }, function(
     yyJson.todayteamers = utils.pickToday(yyJson.teamers, yyJson.date)
     yyJson.todaythingers = utils.pickToday(yyJson.thingers, yyJson.date)
 
-    fs.writeFileSync(outputLangPath + '/' + '1.json', JSON.stringify(yyJson))
+    fs.writeFileSync(outputLangPath + '/' + '1.json', JSON.stringify(yyJson, null, 2))
     //模板生成wish.html
     let templateWish = fs.readFileSync(
       path.join(process.cwd(), '/template/wish.html'),
@@ -123,8 +128,54 @@ excelToJson(excelPathName1, { isColOriented: false, sheet: 1 }, function(
       ),
       resultPhp
     )
+    //ftp推送到远程
+    args.length && ftp.push()
   }
 })
+
+excelToJson(excelPathName2, { isColOriented: false, sheet: 1 }, function(
+  err,
+  excelDatas
+) {
+  let qqJson = {
+    talkers: []
+  }
+  if (err) {
+    console.log(err)
+  } else {
+    excelDatas.forEach((item, index) => {
+      let obj = {}
+      obj.letter = String.fromCharCode(65 + index)
+      for (let key in item) {
+        let value = item[key]
+        if (/故事/.test(key)) {
+          obj.content = value
+        }
+      }
+      qqJson.talkers.push(obj)
+    })
+    fs.writeFileSync(outputLangPath + '/' + '2.json', JSON.stringify(qqJson))
+    //模板生成talk.html
+    let templateTalk = fs.readFileSync(
+      path.join(process.cwd(), '/template/talk.html'),
+      'utf8'
+    )
+    let resultTalk = ejs.render(templateTalk, qqJson)
+    fs.writeFileSync(path.join(process.cwd(), '/dist/talk.html'), resultTalk)
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 //生成悄悄话
 excelToJson(excelPathName2, { isColOriented: false, sheet: 1 }, function(
@@ -148,7 +199,7 @@ excelToJson(excelPathName2, { isColOriented: false, sheet: 1 }, function(
       }
       qqJson.talkers.push(obj)
     })
-    fs.writeFileSync(outputLangPath + '/' + '2.json', JSON.stringify(qqJson))
+    fs.writeFileSync(outputLangPath + '/' + '2.json', JSON.stringify(qqJson, null, 2))
     //模板生成talk.html
     let templateTalk = fs.readFileSync(
       path.join(process.cwd(), '/template/talk.html'),
